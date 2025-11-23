@@ -5,8 +5,8 @@ from weather_api import (
 )
 
 st.set_page_config(page_title="Climate Hub", page_icon="🌤️")
-st.title("🌎 Climate Hub")
-st.subheader("Check the current weather in any city of Pakistan")
+st.title("Climate Hub")
+st.caption("Check the current weather in any city of Pakistan")
 
 # Session state for buttons
 if 'show_forecast' not in st.session_state:
@@ -18,7 +18,7 @@ cities = ["Lahore", "Karachi", "Islamabad", "Quetta", "Peshawar", "Multan", "Fai
 city = st.selectbox("Select a city", cities)
 
 # Get Weather Button
-if st.button("Get Weather"):
+if st.button("Todays Weather"):
     with st.spinner(f"Fetching coordinates for {city}..."):
         lat, lon = get_coordinates(city)
     if lat and lon:
@@ -35,12 +35,11 @@ if st.button("Get Weather"):
             # Display current weather in a card
             st.markdown(
                 f"""
-                <div style='background-color:#e0f7fa; border-radius:10px; padding:15px; text-align:center; margin:15px auto; max-width:400px'>
-                    <h3 style='margin:5px 0; font-size:20px'>{icon} Current Weather in {city}</h3>
-                    <p style='font-size:40px; margin:5px 0'>{icon}</p>
-                    <p style='font-size:18px; font-weight:bold; margin:5px 0'>{description}</p>
-                    <p style='font-size:28px; font-weight:bold; margin:8px 0'>🌡️ {temperature}°C</p>
-                    <p style='font-size:14px; margin:5px 0'>💨 Wind Speed: {wind_speed} km/h</p>
+                <div style='background-color:#e0f7fa; border-radius:10px; padding:20px; text-align:center; margin:15px auto; max-width:400px'>
+                    <h3 style='margin:8px 0; font-size:22px'>{city}</h3>
+                    <p style='font-size:60px; margin:15px 0'>{icon}</p>
+                    <p style='font-size:18px; font-weight:bold; margin:8px 0; color:#333'>{description}</p>
+                    <p style='font-size:36px; font-weight:bold; margin:12px 0'>{temperature}°C</p>
                 </div>
                 """, unsafe_allow_html=True
             )
@@ -55,7 +54,7 @@ if st.button("Get Weather"):
 
 # 7-Day Forecast Button - only show if weather was successfully loaded
 if st.session_state.weather_loaded:
-    if st.button("Show 7-Day Forecast"):
+    if st.button("Next 7 Days Forecast"):
         st.session_state.show_forecast = True
 
 # Display forecast if button was clicked
@@ -84,11 +83,13 @@ if st.session_state.show_forecast:
 
                     col.markdown(
                         f"""
-                        <div style='background-color:#e0f7fa; border-radius:10px; padding:18px; text-align:center'>
-                            <p style='font-size:16px; font-weight:bold; margin:6px 0'>{date_display}</p>
-                            <p style='font-size:42px; margin:10px 0'>{icon}</p>
-                            <p style='font-size:14px; margin:6px 0; word-wrap:break-word'>{condition}</p>
-                            <p style='font-size:16px; margin:6px 0'>🌡️ {max_temp}°/{min_temp}°</p>
+                        <div style='background-color:#e0f7fa; border-radius:10px; padding:18px; text-align:center; height:340px; width:100%; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; align-items:center'>
+                            <div style='font-size:16px; font-weight:bold; width:100%'>{date_display}</div>
+                            <div style='flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; width:100%'>
+                                <div style='font-size:48px; margin-bottom:5px'>{icon}</div>
+                                <div style='font-size:14px; font-weight:bold; color:#333; word-wrap:break-word; overflow-wrap:break-word'>{condition}</div>
+                            </div>
+                            <div style='font-size:20px; font-weight:bold; width:100%'>{max_temp}° / {min_temp}°</div>
                         </div>
                         """, unsafe_allow_html=True
                     )
