@@ -82,13 +82,11 @@ if st.session_state.show_forecast:
 
                     col.markdown(
                         f"""
-                        <div style='background-color:#e0f7fa; border-radius:10px; padding:18px; text-align:center; height:340px; width:100%; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; align-items:center'>
-                            <div style='font-size:16px; font-weight:bold; width:100%'>{date_display}</div>
-                            <div style='flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; width:100%'>
-                                <div style='font-size:48px; margin-bottom:5px'>{icon}</div>
-                                <div style='font-size:14px; font-weight:bold; color:#333; word-wrap:break-word; overflow-wrap:break-word'>{condition}</div>
-                            </div>
-                            <div style='font-size:20px; font-weight:bold; width:100%'>{max_temp}° / {min_temp}°</div>
+                        <div style='background-color:#e0f7fa; border-radius:10px; padding:15px; text-align:center; min-height:360px; width:100%; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; overflow:hidden'>
+                            <div style='font-size:16px; font-weight:bold; width:100%; margin-bottom:12px; flex-shrink:0'>{date_display}</div>
+                            <div style='font-size:48px; margin:10px 0; flex-shrink:0'>{icon}</div>
+                            <div style='font-size:14px; font-weight:bold; color:#333; width:100%; margin:8px 0; min-height:45px; display:flex; align-items:center; justify-content:center; word-wrap:break-word; overflow-wrap:break-word; overflow:hidden; padding:0 5px; flex-shrink:0'>{condition}</div>
+                            <div style='font-size:20px; font-weight:bold; width:100%; margin-top:auto; margin-bottom:0; padding-top:10px; flex-shrink:0'>{max_temp}° / {min_temp}°</div>
                         </div>
                         """, unsafe_allow_html=True
                     )
