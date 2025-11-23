@@ -62,7 +62,6 @@ if st.session_state.show_forecast:
     if 'lat' in st.session_state and 'lon' in st.session_state:
         forecast = get_5day_forecast(st.session_state.lat, st.session_state.lon)
         if forecast:
-            st.subheader("🌤 7-Day Forecast")
             cols = st.columns(7)
             for i, col in enumerate(cols):
                 if i < len(forecast['time']):
